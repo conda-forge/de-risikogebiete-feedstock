@@ -6,21 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/de-risikogebiete-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/de-risikogebiete-{{ version }}.tar.gz
   sha256: 9246adea4acf68fc8bce7174e813857c107086fc19f5a7ad78ff6dab284416c6
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
     - poetry
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - python-dateutil
     - urllib3 >=1.25.3
 
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/bundesAPI/risikogebiete-api
